@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 import { FaPlus } from "react-icons/fa";
-import axios from 'axios'
+// import axios from 'axios'
 import { ADD_ALL_MESSAGES } from "../redux/actionTypes";
 import './ChatLogin.scss'
 
@@ -13,11 +13,11 @@ const ChatLogin = ({ form, roomId, setRoomId, setRoomIdStatus, nickname, client,
     const dispatch = useDispatch()
     const [tab, setTab] = useState("create");
 
-    const GITHUB_USERNAME = "kumar04988";
-    const REPO_NAME = "Images";
-    const BRANCH = "main";
-    const FOLDER = "images";
-    const GITHUB_TOKEN = "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";
+    // const GITHUB_USERNAME = "kumar04988";
+    // const REPO_NAME = "Images";
+    // const BRANCH = "main";
+    // const FOLDER = "images";
+    // const GITHUB_TOKEN = "";
 
     let roomIdInfo = watch("roomId")
 
@@ -86,41 +86,45 @@ const ChatLogin = ({ form, roomId, setRoomId, setRoomIdStatus, nickname, client,
         }
 
         try {
-            setIsLoading(true);
-            const imageExtension = file.type.split("/")[1];
-            const imageName = `${uuidv4()}.${imageExtension}`;
-            const reader = new FileReader();
+            setIsLoading(true)
+            const imageUrl = URL.createObjectURL(file)
+            setImage(imageUrl)
+            successMsg("Profile image added")
+            setIsLoading(false)
+            // const imageExtension = file.type.split("/")[1];
+            // const imageName = `${uuidv4()}.${imageExtension}`;
+            // const reader = new FileReader();
 
-            reader.readAsDataURL(file);
-            reader.onloadend = async () => {
-                try {
-                    const base64Image = reader.result.split(",")[1];
-                    const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER}/${imageName}`;
+            // reader.readAsDataURL(file);
+            // reader.onloadend = async () => {
+            //     try {
+            //         const base64Image = reader.result.split(",")[1];
+            //         const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER}/${imageName}`;
 
-                    await axios.put(
-                        url,
-                        {
-                            message: `Upload ${imageName}`,
-                            content: base64Image,
-                            branch: BRANCH,
-                        },
-                        {
-                            headers: {
-                                Authorization: `token ${GITHUB_TOKEN}`,
-                                Accept: "application/vnd.github.v3+json",
-                            },
-                        }
-                    );
+            //         await axios.put(
+            //             url,
+            //             {
+            //                 message: `Upload ${imageName}`,
+            //                 content: base64Image,
+            //                 branch: BRANCH,
+            //             },
+            //             {
+            //                 headers: {
+            //                     Authorization: `token ${GITHUB_TOKEN}`,
+            //                     Accept: "application/vnd.github.v3+json",
+            //                 },
+            //             }
+            //         );
 
-                    const uploadedImageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/${FOLDER}/${imageName}`;
-                    setImage(uploadedImageUrl);
-                    successMsg("Profile image added");
-                } catch (error) {
-                    errorMsg("Error uploading image");
-                } finally {
-                    setIsLoading(false);
-                }
-            };
+            //         const uploadedImageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/${FOLDER}/${imageName}`;
+                    // setImage(uploadedImageUrl)
+                    
+                // } catch (error) {
+                //     errorMsg("Error uploading image");
+                // } finally {
+                //     setIsLoading(false);
+                // }
+            // }
         } catch (error) {
             setIsLoading(false);
             errorMsg("Unexpected error occurred.");
