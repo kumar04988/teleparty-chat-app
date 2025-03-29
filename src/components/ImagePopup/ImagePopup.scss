@@ -1,0 +1,61 @@
+.image-popup-wrapper {
+
+    .profile-img{
+        width: 28px;
+        height: 28px;
+    }
+
+    .image-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 3;
+    }
+
+    .image-wrapper {
+        position: fixed;
+        top: 26%;
+        left: 5%;
+        width: 90%;
+        height: 44%;
+        background-color: #FFFFFF;
+        z-index: 4;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        gap: 2px;
+
+        .header-section {
+            font-size: 16px;
+            padding: 4px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .header {
+                font-weight: bold;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+
+            .close-icon {
+                width: 20px;
+                border: none;
+                outline: none;
+            }
+        }
+
+        .zoom-img {
+            position: absolute;
+            bottom: 0;
+            border-radius: 0px 0px 8px 8px;
+            width: 100% !important;
+            height: 88% !important;
+        }
+    }
+}

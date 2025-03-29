@@ -1,0 +1,49 @@
+@import '../assets/scss/variables';
+
+.chat-wrapper {
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+
+    button,
+    label {
+        padding: 8px 12px;
+        background: $blue-btn-bg;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #FFF;
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    input {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        color: #696060;
+        font-weight: bolder;
+        font-size: 14px;
+        opacity: 1;
+        margin-top: 14px;
+    }
+
+    input::placeholder {
+        opacity: 0.6;
+    }
+
+    .full-height-spinner {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 9999;
+        background: rgba(255, 255, 255, 0.6);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+}
