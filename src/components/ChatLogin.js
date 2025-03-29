@@ -17,7 +17,7 @@ const ChatLogin = ({ form, roomId, setRoomId, setRoomIdStatus, nickname, client,
     const REPO_NAME = "Images";
     const BRANCH = "main";
     const FOLDER = "images";
-    const GITHUB_TOKEN = "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";
+    const GITHUB_TOKEN = "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";
 
     let roomIdInfo = watch("roomId")
 
@@ -74,26 +74,33 @@ const ChatLogin = ({ form, roomId, setRoomId, setRoomIdStatus, nickname, client,
     const onImageChange = (event) => {
         const file = event.target.files[0];
 
-        if (file) {
-            try {
-                setIsLoading(true)
-                const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
-                if (!allowedTypes.includes(file.type)) {
-                    errorMsg("Only PNG, JPG & JPEG images are allowed.")
-                    return;
-                }
+        if (!file) {
+            errorMsg("Please select an image first");
+            return;
+        }
 
-                const image_name = uuidv4()
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onloadend = async () => {
+        const allowedTypes = ["image/png", "image/jpeg", "image/jpg"];
+        if (!allowedTypes.includes(file.type)) {
+            errorMsg("Only PNG, JPG & JPEG images are allowed.");
+            return;
+        }
+
+        try {
+            setIsLoading(true);
+            const imageExtension = file.type.split("/")[1];
+            const imageName = `${uuidv4()}.${imageExtension}`;
+            const reader = new FileReader();
+
+            reader.readAsDataURL(file);
+            reader.onloadend = async () => {
+                try {
                     const base64Image = reader.result.split(",")[1];
-                    const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER}/${image_name}`;
+                    const url = `https://api.github.com/repos/${GITHUB_USERNAME}/${REPO_NAME}/contents/${FOLDER}/${imageName}`;
 
                     await axios.put(
                         url,
                         {
-                            message: `Upload ${image_name}`,
+                            message: `Upload ${imageName}`,
                             content: base64Image,
                             branch: BRANCH,
                         },
@@ -105,17 +112,18 @@ const ChatLogin = ({ form, roomId, setRoomId, setRoomIdStatus, nickname, client,
                         }
                     );
 
-                    const uploadedImageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/${FOLDER}/${image_name}`;
+                    const uploadedImageUrl = `https://raw.githubusercontent.com/${GITHUB_USERNAME}/${REPO_NAME}/${BRANCH}/${FOLDER}/${imageName}`;
                     setImage(uploadedImageUrl);
-                    successMsg("profile image added")
-                    setIsLoading(false)
+                    successMsg("Profile image added");
+                } catch (error) {
+                    errorMsg("Error uploading image");
+                } finally {
+                    setIsLoading(false);
                 }
-            } catch (error) {
-                setIsLoading(false)
-                errorMsg("Error uploading image")
-            }
-        } else {
-            errorMsg("Please select an image first")
+            };
+        } catch (error) {
+            setIsLoading(false);
+            errorMsg("Unexpected error occurred.");
         }
     };
 
