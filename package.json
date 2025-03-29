@@ -19,7 +19,7 @@
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.5",
     "sass": "^1.86.0",
-    "teleparty-websocket-lib": "git+https://github.com/kumar04988/teleparty-websocket-lib.git",
+    "teleparty-websocket-lib": "https://github.com/watchparty-org/teleparty-websocket-lib",
     "uuid": "^11.1.0",
     "web-vitals": "^2.1.0"
   },

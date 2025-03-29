@@ -9135,9 +9135,9 @@ tapable@^2.0.0, tapable@^2.1.1, tapable@^2.2.0, tapable@^2.2.1:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.2.1.tgz#1967a73ef4060a82f12ab96af86d52fdb76eeca0"
   integrity sha512-GNzQvQTOIP6RyTfE2Qxb8ZVlNmw0n88vp1szwWRimP02mnTsx3Wtn5qRdqY9w2XduFNUgvOwhNnQsjwCp+kqaQ==
 
-"teleparty-websocket-lib@git+https://github.com/kumar04988/teleparty-websocket-lib.git":
+"teleparty-websocket-lib@https://github.com/watchparty-org/teleparty-websocket-lib":
   version "1.0.4"
-  resolved "git+https://github.com/kumar04988/teleparty-websocket-lib.git#817e2739cdbffa6bb3eda476f687b96a5fff313a"
+  resolved "https://github.com/watchparty-org/teleparty-websocket-lib#a8b5137338004f4107faea63b89d3b122b374631"
 
 temp-dir@^2.0.0:
   version "2.0.0"
